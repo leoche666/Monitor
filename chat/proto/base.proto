@@ -1,0 +1,44 @@
+syntax = "proto2";
+
+package tbsproto;
+
+option java_package = "com.thebeastshop.monitor.proto";
+option java_outer_classname = "TheBeastShopBaseProto";
+
+import "msgid.proto";
+//KeyValue键值对
+message KeyValue{
+    required string     Key         = 1;
+    required string     Value       = 2;
+}
+
+//扩展数据 KeyValue键值对
+message ExtensionsData {
+    repeated KeyValue   Elements    = 1;
+}
+
+//错误码
+message BaseError {
+    required int64  Code            = 1 [default=0];    //错误编码
+    optional string Message         = 2;                //文本内容
+    optional string Source          = 3;                //来源
+    optional ExtensionsData Extensions  = 1000;         //扩展数据
+}
+
+message BaseHead{       //消息头
+    required uint64     ReqID       = 1;                // 请求ID(taskId)
+    optional int64      Time        = 2;                // Time
+    optional EnumMsgID  MsgID       = 3;                // 消息业务EnumMsgID
+    optional BaseError	Error       = 4;                // Error
+    optional ExtensionsData Extensions  = 1000;
+}
+
+message BaseBody{       //消息体
+    optional bytes     MsgData      = 1;                // 消息数据
+    optional ExtensionsData Extensions  = 1000;         // 扩展数据
+}
+
+message BaseMsg{
+    required BaseHead  Head         = 1;                //头
+    optional BaseBody  Body         = 2;                //体
+}

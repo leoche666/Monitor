@@ -1,0 +1,42 @@
+syntax = "proto2";
+
+package tbsproto;
+option java_package = "com.thebeastshop.monitor.proto";
+option java_outer_classname = "TheBeastShopServiceProto";
+
+import "quote.proto";
+
+//服务
+enum ServiceType{
+    ServiceDyna     		= 1;  //首页访问量推送
+}
+
+
+//订阅推送
+enum SubType{
+    SubNone         = 1;//不推送
+    SubOn           = 2;//推送
+	SubOff          = 3;//取消请求
+}
+
+
+//请求
+message Request{
+    required ServiceType Service    =    1;    //服务
+    required SubType Sub            =    2[default=SubNone];    //是否推送
+    repeated string Objs            =    3;    //OBJ列表
+}
+
+//响应消息
+enum ServiceError{
+    ErrServiceOK = 0;
+    ErrServiceBegin = 2001;
+    ErrServiceEnd = 3000;
+}
+
+//返回结果
+message Response{
+    required ServiceError Result    =    1;    //返回结果
+    required ServiceType Service    =    2;    //服务类型
+    required QuoteData Data         =    4;    //行情结果
+}

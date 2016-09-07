@@ -1,0 +1,18 @@
+syntax = "proto2";
+
+package tbsproto;
+option java_package = "com.thebeastshop.monitor.proto";
+option java_outer_classname = "TheBeastQuoteProto";
+
+message QuoteTick{//逐笔（成交明细）
+	repeated uint64 ID			=	1;	//序号
+	repeated int64 Time			=	2;	//时间
+	repeated double Price		=	3;	//成交价
+	repeated int64 Volume		=	4;	//现量
+	repeated int64 property		=	5;	//性质
+}
+
+message QuoteData{
+    required string Obj				=	1;	//品种
+	required int64 Dynas		    =	3;	//行情数据
+}

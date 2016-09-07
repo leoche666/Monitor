@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package tbsproto;
+option java_package = "com.thebeastshop.monitor.proto";
+option java_outer_classname = "TheBeastShopMsgIDProto";
+
+
+//服务号约定，单数为发端，双数为收端，一单一双为一组，收端号=发端号+1
+enum EnumMsgID{         //业务ID描述
+    Msg_Request                     = 1;                // 对应service.proto Request
+    Msg_Response                    = 2;                // 对应service.proto Response
+
+    //推送消息
+    Msg_PushData                    = 3;
+}
